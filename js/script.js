@@ -27,20 +27,22 @@ quotes = [
   },
 
   {quote: "Essentially, all models are wrong, but some are useful.",
-  source: "George E Box",
+  source: "George E. Box",
   citation: "Empirical Model-Building and Response Surfaces, p. 424, Wiley. ISBN 0471810339",
   year: "1987",
   tag: ["#maths"]
   },
 
   {quote: "Every form of addiction is bad, no matter whether the narcotic be alcohol, morphine or idealism.",
-  source: "Carl G Jung",
+  source: "Carl G. Jung",
   tag: ["#moderation", "#psychology"]
   },
 
-  {quote: "If you aren't in the moment, you are either looking forward to uncertainty, or back to pain and regret.",
-  source: "Jim Carrey",
-  tag: ["#now"]
+  {quote: "Miss Kelly, you know, when you wear my flower you make it beautiful.",
+  source: "Elwood P. Dowd",
+  citation: "Harvey",
+  year: "1950",
+  tag: ["#perspective"]
   },
 
   {quote: "A lie is just a great story that someone ruined with the truth.",
@@ -49,7 +51,7 @@ quotes = [
   tag: ["#perspective"]
   },
 
-  {quote: "Gentlemen, you had my curiosity... but now you have my attention",
+  {quote: "Gentlemen, you had my curiosity... but now you have my attention.",
   source: "Calvin Candie",
   citation: "Django Unchained",
   year: "2012",
@@ -74,7 +76,6 @@ function getRandomQuote(){
   return quotes[getNumber()];
 }
 
-
 //print out the quote object contents to a html container
 function printQuote(){
 
@@ -93,6 +94,7 @@ function printQuote(){
     };
   document.getElementById('quote-box').innerHTML = html;
   document.body.style.backgroundColor = getRandomColor();
+
 };
 
 // get a random color
@@ -105,5 +107,9 @@ function getRandomColor() {
   return color;
 };
 
-//sets quote and color reload time
+//function called when page loads so that the default quote in
+//index.html is overwritten.
+printQuote()
+
+//sets quote and color reload time.
 window.setInterval(printQuote, 30000);
