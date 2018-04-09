@@ -7,60 +7,60 @@ quotes = [
   {quote: "We do not talk, we bludgeon one another with facts and theories gleaned from cursory readings of newspapers, magazines and digests.",
   source: "Henery Miller",
   year: "1945",
-  tag: ["#communication"]
+  tag: [" #communication "]
   },
 
   {quote:"Facts do not speak for themselves. They speak for or against competing theories. Facts divorced from theories or visions are mere isolated curiosities.",
   source: "Thomas Sowell",
-  tag: ["#satistics", "#politics"]
+  tag: [" #satistics", " #politics"]
   },
 
   {quote: "Sometimes when I'm talking, my words can't keep up with my thoughts. I wonder why we think faster than we speak. Probably so we can think twice.",
   source: "Bill Watterson",
   citation: "Calvin and Hobbs",
-  tag: ["#humour", "#thought"]
+  tag: [" #humour", " #thought"]
   },
 
   {quote: "Running a start-up is like chewing glass and staring into the abyss. After a while, you stop staring, but the glass chewing never ends.",
   source: "Elon Musk",
-  tag: ["#capitalism","#reality"]
+  tag: [" #capitalism", " #reality"]
   },
 
   {quote: "Essentially, all models are wrong, but some are useful.",
   source: "George E. Box",
-  citation: "Empirical Model-Building and Response Surfaces, p. 424, Wiley. ISBN 0471810339",
+  citation: "Empirical Model-Building and Response Surfaces, p.424",
   year: "1987",
-  tag: ["#maths"]
+  tag: [" #maths"]
   },
 
   {quote: "Every form of addiction is bad, no matter whether the narcotic be alcohol, morphine or idealism.",
   source: "Carl G. Jung",
-  tag: ["#moderation", "#psychology"]
+  tag: [" #moderation", " #psychology"]
   },
 
   {quote: "Miss Kelly, you know, when you wear my flower you make it beautiful.",
   source: "Elwood P. Dowd",
   citation: "Harvey",
   year: "1950",
-  tag: ["#perspective"]
+  tag: [" #perspective "]
   },
 
   {quote: "A lie is just a great story that someone ruined with the truth.",
   source: "Barney Stinson",
   citation: "How I Met Your Mother",
-  tag: ["#perspective"]
+  tag: [" #perspective "]
   },
 
   {quote: "Gentlemen, you had my curiosity... but now you have my attention.",
   source: "Calvin Candie",
   citation: "Django Unchained",
   year: "2012",
-  tag: ["#marketing"]
+  tag: [" #marketing "]
   },
 
   {quote: "Science is a way of thinking much more than it is a body of knowledge.",
   source: "Carl Sagan",
-  tag: ["#Science", "#methodology"]
+  tag: [" #Science", " #methodology"]
   },
 
 ];
@@ -78,26 +78,41 @@ function getRandomQuote(){
 
 //print out the quote object contents to a html container
 function printQuote(){
-
+  let tag;
+  let html
   let randomQuote = getRandomQuote();
+  let quoteBox = document.getElementById('quote-box');
+  let existingTags = document.querySelector('.tag'); //declaring hoisted vars
 
+  //check to see if pervious tags exist and if so remove them
+  if(existingTags) {
+    existingTags.remove();
+  };
+
+  //add tags dynamicaly to a span above the quote-box div
+  if(randomQuote.tag){
+    tag = `<span class="tag"> ${ randomQuote.tag } </span></p>`
+    quoteBox.insertAdjacentHTML('beforebegin', tag);
+    };
+
+  //html var used to conditionaly build the innerHTML of the quote-box div
   html = `<p class="quote">${ randomQuote.quote }</p>
-          <p class="source">${ randomQuote.source }`;
+              <p class="source">${ randomQuote.source }`;
   if(randomQuote.citation){
     html += `<span class="citation">${ randomQuote.citation }</span>`
     };
   if(randomQuote.year){
     html += `<span class="year">${ randomQuote.year }</span>`
     };
-  if(randomQuote.tag){
-    html += `<span class="year"> ${ randomQuote.tag } </span></p>`
-    };
-  document.getElementById('quote-box').innerHTML = html;
+
+  quoteBox.innerHTML = html;
+
+  //retrieve a random color and set it to the document body's background color attribute
   document.body.style.backgroundColor = getRandomColor();
 
-};
+}; //end of printQuote function
 
-// get a random color
+// generate a random color
 function getRandomColor() {
   const letters = '0123456789ABCDEF';
   let color = '#';
@@ -107,9 +122,8 @@ function getRandomColor() {
   return color;
 };
 
-//function called when page loads so that the default quote in
-//index.html is overwritten.
+//function called when page loads so that the default quote in index.html is overwritten
 printQuote()
 
-//sets quote and color reload time.
+//sets color, quote et al reload time
 window.setInterval(printQuote, 30000);
